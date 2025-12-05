@@ -1,0 +1,194 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 0 0% 4%;
+    --foreground: 40 20% 95%;
+
+    --card: 0 0% 7%;
+    --card-foreground: 40 20% 95%;
+
+    --popover: 0 0% 7%;
+    --popover-foreground: 40 20% 95%;
+
+    --primary: 38 92% 50%;
+    --primary-foreground: 0 0% 4%;
+
+    --secondary: 0 0% 12%;
+    --secondary-foreground: 40 20% 95%;
+
+    --muted: 0 0% 15%;
+    --muted-foreground: 0 0% 60%;
+
+    --accent: 38 92% 50%;
+    --accent-foreground: 0 0% 4%;
+
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 210 40% 98%;
+
+    --border: 0 0% 18%;
+    --input: 0 0% 18%;
+    --ring: 38 92% 50%;
+
+    --radius: 0.75rem;
+
+    /* Custom tokens */
+    --gold: 38 92% 50%;
+    --gold-light: 40 100% 65%;
+    --gold-dark: 35 85% 40%;
+    --charcoal: 0 0% 8%;
+    --charcoal-light: 0 0% 12%;
+    --cream: 40 20% 95%;
+    --glass: 0 0% 100% / 0.05;
+    --glass-border: 0 0% 100% / 0.1;
+
+    /* Gradients */
+    --gradient-gold: linear-gradient(135deg, hsl(38 92% 50%), hsl(40 100% 65%));
+    --gradient-dark: linear-gradient(180deg, hsl(0 0% 4%), hsl(0 0% 8%));
+    --gradient-radial: radial-gradient(ellipse at center, hsl(0 0% 12%) 0%, hsl(0 0% 4%) 70%);
+    --gradient-glow: radial-gradient(ellipse at center, hsl(38 92% 50% / 0.15) 0%, transparent 70%);
+
+    /* Shadows */
+    --shadow-sm: 0 2px 8px hsl(0 0% 0% / 0.3);
+    --shadow-md: 0 4px 16px hsl(0 0% 0% / 0.4);
+    --shadow-lg: 0 8px 32px hsl(0 0% 0% / 0.5);
+    --shadow-glow: 0 0 40px hsl(38 92% 50% / 0.3);
+    --shadow-glow-lg: 0 0 80px hsl(38 92% 50% / 0.4);
+
+    /* Sidebar */
+    --sidebar-background: 0 0% 6%;
+    --sidebar-foreground: 40 20% 95%;
+    --sidebar-primary: 38 92% 50%;
+    --sidebar-primary-foreground: 0 0% 4%;
+    --sidebar-accent: 0 0% 12%;
+    --sidebar-accent-foreground: 40 20% 95%;
+    --sidebar-border: 0 0% 18%;
+    --sidebar-ring: 38 92% 50%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply bg-background text-foreground font-sans antialiased;
+  }
+
+  ::selection {
+    @apply bg-primary/30 text-foreground;
+  }
+
+  /* Custom scrollbar */
+  ::-webkit-scrollbar {
+    width: 8px;
+  }
+
+  ::-webkit-scrollbar-track {
+    @apply bg-background;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    @apply bg-muted rounded-full;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    @apply bg-primary/50;
+  }
+}
+
+@layer components {
+  /* Glass card effect */
+  .glass {
+    @apply bg-[hsl(var(--glass))] backdrop-blur-xl border border-[hsl(var(--glass-border))];
+  }
+
+  .glass-strong {
+    @apply bg-[hsl(0_0%_100%/0.08)] backdrop-blur-2xl border border-[hsl(0_0%_100%/0.15)];
+  }
+
+  /* Gradient text */
+  .gradient-text {
+    @apply bg-clip-text text-transparent bg-gradient-to-r from-primary to-[hsl(var(--gold-light))];
+  }
+
+  /* Glow effects */
+  .glow {
+    box-shadow: var(--shadow-glow);
+  }
+
+  .glow-lg {
+    box-shadow: var(--shadow-glow-lg);
+  }
+
+  /* Animated underline */
+  .link-underline {
+    @apply relative;
+  }
+
+  .link-underline::after {
+    @apply content-[''] absolute bottom-0 left-0 w-0 h-[2px] bg-primary transition-all duration-300;
+  }
+
+  .link-underline:hover::after {
+    @apply w-full;
+  }
+
+  /* Section padding */
+  .section-padding {
+    @apply py-20 md:py-28 lg:py-36;
+  }
+
+  /* Container */
+  .container-custom {
+    @apply max-w-7xl mx-auto px-4 sm:px-6 lg:px-8;
+  }
+}
+
+@layer utilities {
+  /* Animation delays */
+  .animation-delay-100 { animation-delay: 100ms; }
+  .animation-delay-200 { animation-delay: 200ms; }
+  .animation-delay-300 { animation-delay: 300ms; }
+  .animation-delay-400 { animation-delay: 400ms; }
+  .animation-delay-500 { animation-delay: 500ms; }
+
+  /* Text balance */
+  .text-balance {
+    text-wrap: balance;
+  }
+
+  /* GPU Acceleration */
+  .gpu-accelerated {
+    transform: translateZ(0);
+    will-change: transform, opacity;
+    backface-visibility: hidden;
+    perspective: 1000px;
+  }
+
+  /* Optimized animations */
+  @media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+    }
+  }
+
+  /* Mobile optimizations */
+  @media (max-width: 768px) {
+    .reduce-animations {
+      animation: none !important;
+      transition: opacity 0.2s ease !important;
+    }
+  }
+}
